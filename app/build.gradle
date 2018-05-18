@@ -29,4 +29,9 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.android.support:design:27.0.2'
+    // Stetho core
+    compile 'com.facebook.stetho:stetho:1.5.0'
+//    compile 'com.uphyca:stetho_realm:2.0.1'
+    //If you want to add a network helper
+//    compile 'com.facebook.stetho:stetho-okhttp:1.5.0'
 }

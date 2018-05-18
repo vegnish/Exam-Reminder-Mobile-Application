@@ -2,7 +2,12 @@ package com.example.vegnish.assignment1;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -12,9 +17,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.facebook.stetho.Stetho;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,99 +31,131 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.prefs.Preferences;
 
 public class AddSlots extends AppCompatActivity {
     private Spinner spinner;
     private static final String[]paths = {"Chief Invigilator", "Invigilator", "Standby Invigilator"};
+    String subject_code, subject_name, location_, date_, time_, spinner_ ;
 
-    // Storage Permissions
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
+    final Calendar myCalendar = Calendar.getInstance();
 
-    /**
-     * Checks if the app has permission to write to device storage
-     *
-     * If the app does not has permission then the user will be prompted to grant permissions
-     *
-     * @param activity
-     */
-    public static void verifyStoragePermissions(Activity activity) {
-        // Check if we have write permission
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
-            ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
-        }
+    public void createSlotObj(EditText subjectCode, EditText subjectName, EditText date, EditText time, EditText location, Object selectedItem){
+        subject_code = subjectCode.getText().toString();
+        subject_name = subjectName.getText().toString();
+        date_ = date.getText().toString();
+        time_ = time.getText().toString();
+        location_ = location.getText().toString();
+        spinner_ = selectedItem.toString();
     }
+    private void updateDateLabel(EditText date) {
+        String myFormat = "dd/MM/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
+        date.setText(sdf.format(myCalendar.getTime()));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Stetho.initializeWithDefaults(this);
         setContentView(R.layout.activity_add_slots);
         setTitle("Add Slots");
-        verifyStoragePermissions(this);
+
+        final EditText subjectCode = (EditText) findViewById(R.id.subjectCode);
         final EditText subjectName = (EditText) findViewById(R.id.subjectName);
-        Button addSlotButton = (Button) findViewById(R.id.addSlotsButton);
-        addSlotButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                try{
-                    String subject_name =  subjectName.getText().toString();
-                    if(!subject_name.trim().equals("")){
-                        File file =new File(Environment.getExternalStorageDirectory()+ "Assign1.txt");
+        final EditText date = (EditText) findViewById(R.id.date);
+        final EditText time = (EditText) findViewById(R.id.time);
+        final EditText location = (EditText) findViewById(R.id.location);
 
-                        file.mkdirs();
-                        if(file.exists()){
-                            Log.d("file status", "file exists");
-                        }
-                        //if file doesnt exists, then create it
-                        if(!file.exists()){
-                            file.createNewFile();
-                            Log.d("file status", "file created");
-                        }
-
-                        Log.d("path name", String.valueOf(file));
-
-                        FileOutputStream  fileWritter = new FileOutputStream(file.getName(),true);
-                        fileWritter.write(subject_name.getBytes());
-                        fileWritter.close();
-                    }
-                }catch (IOException e) {
-
-                    e.printStackTrace(); }
-
-        }});
+        // Drop down menu
         spinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddSlots.this,
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddSlots.this,
                 android.R.layout.simple_spinner_item, paths);
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        //spinner.setOnItemSelectedListener(this);
+        final Object selectedItem = spinner.getSelectedItem();
+
+        Button addSlotButton = (Button) findViewById(R.id.addSlotsButton);
+
+        //Date picker pop up
+        final DatePickerDialog.OnDateSetListener date_new = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateDateLabel(date);
+            }
+
+        };
+        date.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(AddSlots.this, date_new, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(AddSlots.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        String AM_PM ;
+                        if(selectedHour < 12) {
+                            AM_PM = "AM";
+                        } else {
+                            AM_PM = "PM";
+                            if (selectedHour > 12) {selectedHour -= 12;}
+                        }
+                        time.setText( selectedHour + " : " + selectedMinute + " " + AM_PM);
+                    }
+                }, hour, minute, false);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+
+            }
+        });
+
+        //DB creation
+        final SQLiteHelper sQLiteHelper = new SQLiteHelper(AddSlots.this);
+        addSlotButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Create a SlotsModel object and store data
+                createSlotObj(subjectCode,subjectName,date,time,location, selectedItem);
+                final SlotsModel slot = new SlotsModel(subject_code, subject_name, location_, date_, time_, spinner_);
+                sQLiteHelper.insertRecord(slot, AddSlots.this);
+
+                // Reset all inputs
+                subjectCode.setText("");
+                subjectName.setText("");
+                date.setText("");
+                time.setText("");
+                location.setText("");
+                spinner.setAdapter(adapter);
+
+        }
+        });
 
     }
 
-//    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-//
-//        switch (position) {
-//            case 0:
-//                // Whatever you want to happen when the first item gets selected
-//                break;
-//            case 1:
-//                // Whatever you want to happen when the second item gets selected
-//                break;
-//            case 2:
-//                // Whatever you want to happen when the thrid item gets selected
-//                break;
-//
-//        }
-//    }
+
 }
