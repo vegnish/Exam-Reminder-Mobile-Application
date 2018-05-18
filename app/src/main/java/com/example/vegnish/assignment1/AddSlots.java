@@ -78,7 +78,7 @@ public class AddSlots extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, paths);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        final Object selectedItem = spinner.getSelectedItem();
+
 
         Button addSlotButton = (Button) findViewById(R.id.addSlotsButton);
 
@@ -134,12 +134,13 @@ public class AddSlots extends AppCompatActivity {
             }
         });
 
-        //DB creation
+        //DB Object creation
         final SQLiteHelper sQLiteHelper = new SQLiteHelper(AddSlots.this);
         addSlotButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Create a SlotsModel object and store data
+                final Object selectedItem = spinner.getSelectedItem();
                 createSlotObj(subjectCode,subjectName,date,time,location, selectedItem);
                 final SlotsModel slot = new SlotsModel(subject_code, subject_name, location_, date_, time_, spinner_);
                 sQLiteHelper.insertRecord(slot, AddSlots.this);

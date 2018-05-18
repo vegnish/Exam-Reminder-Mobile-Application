@@ -58,7 +58,7 @@ public class SQLiteHelper extends SQLiteOpenHelper{
         database = this.getReadableDatabase();
         Cursor cursor = database.query(TABLE_NAME, null, null, null, null, null, null);
 
-        ArrayList<SlotsModel> contacts = new ArrayList<SlotsModel>();
+        ArrayList<SlotsModel> slots = new ArrayList<SlotsModel>();
         SlotsModel slotsModel;
         if (cursor.getCount() > 0) {
             for (int i = 0; i < cursor.getCount(); i++) {
@@ -67,14 +67,18 @@ public class SQLiteHelper extends SQLiteOpenHelper{
                 slotsModel = new SlotsModel();
                 slotsModel.setSubjectCode(cursor.getString(0));
                 slotsModel.setSubjectName(cursor.getString(1));
+                slotsModel.setDate_(cursor.getString(2));
+                slotsModel.setTime_(cursor.getString(3));
+                slotsModel.setLocation_(cursor.getString(4));
+                slotsModel.setSpinner_(cursor.getString(5));
 
-                contacts.add(slotsModel);
+                slots.add(slotsModel);
             }
         }
         cursor.close();
         database.close();
 
-        return contacts;
+        return slots;
     }
 
 
