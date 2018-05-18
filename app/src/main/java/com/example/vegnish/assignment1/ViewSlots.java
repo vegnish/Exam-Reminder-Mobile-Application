@@ -25,42 +25,19 @@ public class ViewSlots extends AppCompatActivity {
         setContentView(R.layout.activity_view_slots);
         setTitle("View Slots");
         Stetho.initializeWithDefaults(this);
-//        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-//
-//        // use this setting to improve performance if you know that changes
-//        // in content do not change the layout size of the RecyclerView
-//        mRecyclerView.setHasFixedSize(true);
-//
-//        // use a linear layout manager
-//        mLayoutManager = new LinearLayoutManager(this);
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//
-//        // specify an adapter (see also next example)
-//        String[] myDataset = {"test", "testing"};
-//        mAdapter = new MyAdapter(myDataset);
-//        mRecyclerView.setAdapter(mAdapter);
+        RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
+        recList.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recList.setLayoutManager(llm);
 
 
         //DB object creation
         final SQLiteHelper sQLiteHelper = new SQLiteHelper(ViewSlots.this);
         ArrayList<SlotsModel> allSlots = sQLiteHelper.getAllRecords();
-        SlotsModel temp = allSlots.get(0);
 
-        TextView subjectName = (TextView) findViewById(R.id.subject_name);
-        subjectName.setText(temp.getSubjectName());
-
-        TextView date = (TextView) findViewById(R.id.date);
-        date.setText(temp.getDate_());
-
-        TextView time = (TextView) findViewById(R.id.time);
-        time.setText(temp.getTime_());
-
-        TextView location = (TextView) findViewById(R.id.location_text);
-        location.setText(temp.getLocation_());
-
-        TextView role = (TextView) findViewById(R.id.role_text);
-        role.setText(temp.getSpinner_());
-
+        SlotsAdapter slotsAdapters = new SlotsAdapter(allSlots);
+        recList.setAdapter(slotsAdapters);
 
     }
 
