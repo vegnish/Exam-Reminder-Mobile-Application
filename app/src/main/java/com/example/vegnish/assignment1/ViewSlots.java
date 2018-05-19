@@ -12,12 +12,28 @@ import com.facebook.stetho.Stetho;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class ViewSlots extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    //Sort list in ascending order according to date
+    private void sortList(ArrayList<SlotsModel> allSlots) {
+        Collections.sort(allSlots, new Comparator<SlotsModel>() {
+            public int compare(SlotsModel date1, SlotsModel date2) {
+                // avoiding NullPointerException in case name is null
+                Long date_1 = new Long(date1.getDate_());
+                Long date_2 = new Long(date2.getDate_());
+
+                //for descending order swap return items
+                return date_1.compareTo(date_2);
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +51,8 @@ public class ViewSlots extends AppCompatActivity {
         //DB object creation
         final SQLiteHelper sQLiteHelper = new SQLiteHelper(ViewSlots.this);
         ArrayList<SlotsModel> allSlots = sQLiteHelper.getAllRecords();
+
+        sortList(allSlots);
 
         SlotsAdapter slotsAdapters = new SlotsAdapter(allSlots);
         recList.setAdapter(slotsAdapters);

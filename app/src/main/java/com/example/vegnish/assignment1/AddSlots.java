@@ -41,14 +41,14 @@ import java.util.prefs.Preferences;
 public class AddSlots extends AppCompatActivity {
     private Spinner spinner;
     private static final String[]paths = {"Chief Invigilator", "Invigilator", "Standby Invigilator"};
-    String subject_code, subject_name, location_, date_, time_, spinner_ ;
-
+    String subject_code, subject_name, location_, time_, spinner_ ;
+    long date_;
     final Calendar myCalendar = Calendar.getInstance();
 
     public void createSlotObj(EditText subjectCode, EditText subjectName, EditText date, EditText time, EditText location, Object selectedItem){
         subject_code = subjectCode.getText().toString();
         subject_name = subjectName.getText().toString();
-        date_ = date.getText().toString();
+        date_ =  myCalendar.getTimeInMillis();
         time_ = time.getText().toString();
         location_ = location.getText().toString();
         spinner_ = selectedItem.toString();

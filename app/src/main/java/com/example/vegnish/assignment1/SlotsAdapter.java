@@ -6,7 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.SlotsViewHolder> {
 
@@ -21,11 +24,29 @@ public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.SlotsViewHol
         return slotsList.size();
     }
 
+    /**
+     * Return date in specified format.
+     * @param milliSeconds Date in milliseconds
+     * @param dateFormat Date format
+     * @return String representing date in specified format
+     */
+    public static String getDate(long milliSeconds, String dateFormat)
+    {
+        // Create a DateFormatter object for displaying date in specified format.
+        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+
+        // Create a calendar object that will convert the date and time value in milliseconds to date.
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliSeconds);
+        return formatter.format(calendar.getTime());
+    }
+
     @Override
     public void onBindViewHolder(SlotsViewHolder SlotsViewHolder, int i) {
         SlotsModel slotsObj = slotsList.get(i);
         SlotsViewHolder.subjectName.setText(slotsObj.getSubjectName());
-        SlotsViewHolder.date.setText(slotsObj.getDate_());
+        String dateString = getDate(slotsObj.getDate_(), "dd/MM/yyyy");
+        SlotsViewHolder.date.setText(dateString);
         SlotsViewHolder.time.setText(slotsObj.getTime_());
         SlotsViewHolder.location.setText(slotsObj.getLocation_());
         SlotsViewHolder.role.setText(slotsObj.getSpinner_());

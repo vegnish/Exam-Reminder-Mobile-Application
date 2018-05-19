@@ -27,7 +27,7 @@ public class SQLiteHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + TABLE_NAME + " ( " + COLUMN_SUBJECT_CODE + " VARCHAR," + COLUMN_SUBJECT_NAME + " VARCHAR,"
-                + COLUMN_DATE + " VARCHAR,"
+                + COLUMN_DATE + " INTEGER ,"
                 + COLUMN_TIME + " VARCHAR,"
                 + COLUMN_LOCATION + " VARCHAR,"
                 + COLUMN_SPINNER + " VARCHAR);");
@@ -67,7 +67,7 @@ public class SQLiteHelper extends SQLiteOpenHelper{
                 slotsModel = new SlotsModel();
                 slotsModel.setSubjectCode(cursor.getString(0));
                 slotsModel.setSubjectName(cursor.getString(1));
-                slotsModel.setDate_(cursor.getString(2));
+                slotsModel.setDate_(cursor.getLong(2));
                 slotsModel.setTime_(cursor.getString(3));
                 slotsModel.setLocation_(cursor.getString(4));
                 slotsModel.setSpinner_(cursor.getString(5));
