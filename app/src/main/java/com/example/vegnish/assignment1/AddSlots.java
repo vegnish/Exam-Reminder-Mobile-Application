@@ -41,15 +41,13 @@ import java.util.prefs.Preferences;
 public class AddSlots extends AppCompatActivity {
     private Spinner spinner;
     private static final String[]paths = {"Chief Invigilator", "Invigilator", "Standby Invigilator"};
-    String subject_code, subject_name, location_, time_, spinner_ ;
-    long date_;
+    String subject_name, location_, spinner_ ;
+    long date_,  time_, time_end;
     final Calendar myCalendar = Calendar.getInstance();
 
-    public void createSlotObj(EditText subjectCode, EditText subjectName, EditText date, EditText time, EditText location, Object selectedItem){
-        subject_code = subjectCode.getText().toString();
+    public void createSlotObj(EditText subjectName, EditText location, Object selectedItem){
         subject_name = subjectName.getText().toString();
         date_ =  myCalendar.getTimeInMillis();
-        time_ = time.getText().toString();
         location_ = location.getText().toString();
         spinner_ = selectedItem.toString();
     }
@@ -65,11 +63,10 @@ public class AddSlots extends AppCompatActivity {
         Stetho.initializeWithDefaults(this);
         setContentView(R.layout.activity_add_slots);
         setTitle("Add Slots");
-
-        final EditText subjectCode = (EditText) findViewById(R.id.subjectCode);
         final EditText subjectName = (EditText) findViewById(R.id.subjectName);
         final EditText date = (EditText) findViewById(R.id.date);
         final EditText time = (EditText) findViewById(R.id.time);
+        final EditText timeEnd = (EditText) findViewById(R.id.time_end);
         final EditText location = (EditText) findViewById(R.id.location);
 
         // Drop down menu
@@ -107,11 +104,12 @@ public class AddSlots extends AppCompatActivity {
             }
         });
 
+        //Start time
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Calendar mcurrentTime = Calendar.getInstance();
+                final Calendar mcurrentTime = Calendar.getInstance();
                 int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = mcurrentTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
@@ -126,9 +124,38 @@ public class AddSlots extends AppCompatActivity {
                             if (selectedHour > 12) {selectedHour -= 12;}
                         }
                         time.setText( selectedHour + " : " + selectedMinute + " " + AM_PM);
+                        time_ = mcurrentTime.getTimeInMillis();
                     }
                 }, hour, minute, false);//Yes 24 hour time
-                mTimePicker.setTitle("Select Time");
+                mTimePicker.setTitle("Select Start Time");
+                mTimePicker.show();
+            }
+        });
+
+        //End time
+        timeEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                final Calendar endTime = Calendar.getInstance();
+                int hour = endTime.get(Calendar.HOUR_OF_DAY);
+                int minute = endTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(AddSlots.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        String AM_PM ;
+                        if(selectedHour < 12) {
+                            AM_PM = "AM";
+                        } else {
+                            AM_PM = "PM";
+                            if (selectedHour > 12) {selectedHour -= 12;}
+                        }
+                        timeEnd.setText( selectedHour + " : " + selectedMinute + " " + AM_PM);
+                        time_end = endTime.getTimeInMillis();
+                    }
+                }, hour, minute, false);//Yes 24 hour time
+                mTimePicker.setTitle("Select End Time");
                 mTimePicker.show();
 
             }
@@ -141,15 +168,16 @@ public class AddSlots extends AppCompatActivity {
             public void onClick(View view) {
                 //Create a SlotsModel object and store data
                 final Object selectedItem = spinner.getSelectedItem();
-                createSlotObj(subjectCode,subjectName,date,time,location, selectedItem);
-                final SlotsModel slot = new SlotsModel(subject_code, subject_name, location_, date_, time_, spinner_);
+                createSlotObj(subjectName,location, selectedItem);
+                final SlotsModel slot = new SlotsModel(subject_name, location_, date_, time_, time_end, spinner_);
+
                 sQLiteHelper.insertRecord(slot, AddSlots.this);
 
                 // Reset all inputs
-                subjectCode.setText("");
                 subjectName.setText("");
                 date.setText("");
                 time.setText("");
+                timeEnd.setText("");
                 location.setText("");
                 spinner.setAdapter(adapter);
 

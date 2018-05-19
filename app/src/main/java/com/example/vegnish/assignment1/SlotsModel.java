@@ -4,14 +4,15 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class SlotsModel {
-    private String subjectCode, subjectName, location_, time_, spinner_ ;
-    private long date_;
-    public SlotsModel(String subjectCode, String subjectName, String location_, long date_, String time_, String spinner_) {
-        this.subjectCode = subjectCode;
+    private String subjectName, location_, spinner_ ;
+    private long date_,time_, time_end;
+
+    public SlotsModel(String subjectName, String location_, long date_, long time_,long time_end, String spinner_) {
         this.subjectName = subjectName;
         this.location_ = location_;
         this.date_ = date_;
         this.time_ = time_;
+        this.time_end = time_end;
         this.spinner_ = spinner_;
     }
 
@@ -24,14 +25,6 @@ public class SlotsModel {
 
     public void setSpinner_(String spinner_) {
         this.spinner_ = spinner_;
-    }
-
-    public String getSubjectCode() {
-        return subjectCode;
-    }
-
-    public void setSubjectCode(String subjectCode) {
-        this.subjectCode = subjectCode;
     }
 
     public String getSubjectName() {
@@ -58,11 +51,19 @@ public class SlotsModel {
         this.date_ = date_;
     }
 
-    public String getTime_() {
+    public long getTime_() {
         return time_;
     }
 
-    public void setTime_(String time_) {
+    public void setTime_(long time_) {
         this.time_ = time_;
+    }
+
+    public long getTime_end() {
+        return time_end;
+    }
+
+    public void setTime_end(long time_end) {
+        this.time_end = time_end;
     }
 }
