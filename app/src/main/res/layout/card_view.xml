@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:style="@style/CardView"
     android:id="@+id/card_view"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="150dp"
     android:layout_marginBottom="20dp"
     >
@@ -21,40 +21,53 @@
 
         <TextView
             android:id="@+id/date"
-            android:layout_width="101dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="12dp"
-            android:layout_marginEnd="18dp"
+            android:layout_width="179dp"
+            android:layout_height="23dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:text="25th July 2018"
-            app:layout_constraintBottom_toTopOf="@+id/subject_name"
-            app:layout_constraintEnd_toStartOf="@+id/imageView8"
-            app:layout_constraintStart_toEndOf="@+id/role_text"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05" />
 
         <TextView
             android:id="@+id/subject_name"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginBottom="53dp"
-            android:layout_marginEnd="36dp"
+            android:layout_width="352dp"
+            android:layout_height="33dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="Mobile App Development"
+            android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/role_text"
-            app:layout_constraintEnd_toStartOf="@+id/location_text"
-            app:layout_constraintTop_toBottomOf="@+id/date" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.272" />
 
         <View
             android:id="@+id/color_bar"
-            android:layout_width="75dp"
-            android:layout_height="156dp"
-            android:layout_marginEnd="9dp"
+            android:layout_width="22dp"
+            android:layout_height="129dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
             android:background="@color/colorPrimary"
-            app:layout_constraintBottom_toTopOf="@+id/imageView6"
-            app:layout_constraintEnd_toStartOf="@+id/imageView10"
-            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.006"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView6" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.6" />
 
 
         <TextView
@@ -72,7 +85,7 @@
 
         <TextView
             android:id="@+id/location_text"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="62dp"
             android:text="LT 5"
@@ -87,20 +100,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="17dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
             android:text="Chief Invigilator"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.056"
             app:layout_constraintStart_toEndOf="@+id/imageView10"
-            app:layout_constraintTop_toBottomOf="@+id/subject_name" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            app:layout_constraintStart_toEndOf="@+id/color_bar"
-            app:layout_constraintTop_toTopOf="@+id/time"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.636"
             app:srcCompat="@drawable/ic_access_time_black_24dp" />
 
         <ImageView
@@ -119,11 +140,13 @@
             android:id="@+id/imageView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
+            android:layout_marginBottom="16dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/role_text"
-            app:layout_constraintStart_toEndOf="@+id/color_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.072"
+            app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic_person_black_24dp" />
 
     </android.support.constraint.ConstraintLayout>
