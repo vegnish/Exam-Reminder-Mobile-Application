@@ -47,7 +47,8 @@ public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.SlotsViewHol
         SlotsViewHolder.subjectName.setText(slotsObj.getSubjectName());
         String dateString = getDate(slotsObj.getDate_(), "dd/MM/yyyy");
         SlotsViewHolder.date.setText(dateString);
-        SlotsViewHolder.time.setText(slotsObj.getTime_());
+        String timeString = getDate(slotsObj.getDate_(), "hh:mm");
+        SlotsViewHolder.time.setText(timeString);
         SlotsViewHolder.location.setText(slotsObj.getLocation_());
         SlotsViewHolder.role.setText(slotsObj.getSpinner_());
     }
