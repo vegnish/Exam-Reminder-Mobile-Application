@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="Home Page"/>
+
+        <item android:id="@+id/nav_addslot"
+            android:icon="@drawable/ic_addslot"
+            android:title="Add Slot"/>
+
+
+        <item android:id="@+id/nav_viewslot"
+            android:icon="@drawable/ic_viewslot"
+            android:title="View Slot"/>
+
+        <item android:id="@+id/nav_announcement"
+            android:icon="@drawable/ic_announcement"
+            android:title="Announcement"/>
+
+    </group>
+    <item android:title="Additional Info">
+    <menu>
+
+        <item android:id="@+id/nav_aboutus"
+            android:icon="@drawable/ic_aboutus"
+            android:title="About"/>
+
+        <item android:id="@+id/nav_help"
+            android:icon="@drawable/ic_help"
+            android:title="Help"/>
+    </menu>
+    </item>
+
+</menu>
