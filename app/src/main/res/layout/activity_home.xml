@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="HOME SCREEN"
-        tools:layout_editor_absoluteX="163dp"
-        tools:layout_editor_absoluteY="245dp" />
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="300dp" />
 </android.support.constraint.ConstraintLayout>
