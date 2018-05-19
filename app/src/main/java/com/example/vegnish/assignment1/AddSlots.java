@@ -41,14 +41,14 @@ import java.util.prefs.Preferences;
 public class AddSlots extends AppCompatActivity {
     private Spinner spinner;
     private static final String[]paths = {"Chief Invigilator", "Invigilator", "Standby Invigilator"};
-    String subject_code, subject_name, location_, date_, time_, spinner_ ;
-
+    String subject_code, subject_name, location_, time_, spinner_ ;
+    long date_;
     final Calendar myCalendar = Calendar.getInstance();
 
     public void createSlotObj(EditText subjectCode, EditText subjectName, EditText date, EditText time, EditText location, Object selectedItem){
         subject_code = subjectCode.getText().toString();
         subject_name = subjectName.getText().toString();
-        date_ = date.getText().toString();
+        date_ =  myCalendar.getTimeInMillis();
         time_ = time.getText().toString();
         location_ = location.getText().toString();
         spinner_ = selectedItem.toString();
@@ -78,7 +78,7 @@ public class AddSlots extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, paths);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        final Object selectedItem = spinner.getSelectedItem();
+
 
         Button addSlotButton = (Button) findViewById(R.id.addSlotsButton);
 
@@ -134,12 +134,13 @@ public class AddSlots extends AppCompatActivity {
             }
         });
 
-        //DB creation
+        //DB Object creation
         final SQLiteHelper sQLiteHelper = new SQLiteHelper(AddSlots.this);
         addSlotButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Create a SlotsModel object and store data
+                final Object selectedItem = spinner.getSelectedItem();
                 createSlotObj(subjectCode,subjectName,date,time,location, selectedItem);
                 final SlotsModel slot = new SlotsModel(subject_code, subject_name, location_, date_, time_, spinner_);
                 sQLiteHelper.insertRecord(slot, AddSlots.this);

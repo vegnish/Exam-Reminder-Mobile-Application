@@ -1,9 +1,12 @@
 package com.example.vegnish.assignment1;
 
-public class SlotsModel {
-    private String subjectCode, subjectName, location_, date_, time_, spinner_ ;
+import java.util.Calendar;
+import java.util.Date;
 
-    public SlotsModel(String subjectCode, String subjectName, String location_, String date_, String time_, String spinner_) {
+public class SlotsModel {
+    private String subjectCode, subjectName, location_, time_, spinner_ ;
+    private long date_;
+    public SlotsModel(String subjectCode, String subjectName, String location_, long date_, String time_, String spinner_) {
         this.subjectCode = subjectCode;
         this.subjectName = subjectName;
         this.location_ = location_;
@@ -47,11 +50,11 @@ public class SlotsModel {
         this.location_ = location_;
     }
 
-    public String getDate_() {
+    public long getDate_() {
         return date_;
     }
 
-    public void setDate_(String date_) {
+    public void setDate_(long date_) {
         this.date_ = date_;
     }
 
