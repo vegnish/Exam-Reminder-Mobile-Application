@@ -45,6 +45,7 @@ public class AddSlots extends AppCompatActivity {
     String subject_name, location_, spinner_;
     long date_,  time_, time_end;
     final Calendar myCalendar = Calendar.getInstance();
+    boolean endTimeBool = true;
 
     public void createSlotObj(EditText subjectName, EditText location, Object selectedItem){
         subject_name = subjectName.getText().toString();
@@ -58,21 +59,64 @@ public class AddSlots extends AppCompatActivity {
 
         date.setText(sdf.format(myCalendar.getTime()));
     }
-    public boolean checkDateSet(EditText date){
-        String strDate = date.getText().toString();
-        if (TextUtils.isEmpty(strDate)) {
-            date.setFocusable(true);
-            date.setError("Please choose a date first!");
-            date.requestFocus();
-            return true;
-        }
-        else if (!TextUtils.isEmpty(strDate)) {
-            date.requestFocus();
-            date.setError(null);
+    public boolean checkSubName(EditText subjectName){
+        String subName = subjectName.getText().toString();
+        if (TextUtils.isEmpty(subName)){
+            subjectName.setError("Please fill up");
             return false;
         }
         return true;
     }
+    public boolean checkDateSet(EditText date){
+        String strDate = date.getText().toString();
+        if (TextUtils.isEmpty(strDate)) {
+//            date.setFocusable(true);
+            date.setError("Please choose a date first!");
+//            date.requestFocus();
+            return false;
+        }
+        else {
+//            date.requestFocus();
+            date.setError(null);
+            return true;
+        }
+    }
+
+    public boolean checkStartTime(EditText time){
+        String timeCurrent = time.getText().toString();
+        if (TextUtils.isEmpty(timeCurrent)){
+            time.setError("Please fill up");
+            return false;
+        }
+        else {
+            time.setError(null);
+            return true;
+        }
+    }
+
+    public boolean checkEndTime(EditText timeEnd){
+        String checkEndTime = timeEnd.getText().toString();
+        if (TextUtils.isEmpty(checkEndTime)){
+            timeEnd.setError("Please fill up");
+            return false;
+        }
+        else {
+            timeEnd.setError(null);
+            return true;
+        }
+    }
+    public boolean checkLocation(EditText location){
+        String checkLocation = location.getText().toString();
+        if (TextUtils.isEmpty(checkLocation)){
+            location.setError("Please fill up");
+            return false;
+        }
+        else {
+            location.setError(null);
+            return true;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +151,6 @@ public class AddSlots extends AppCompatActivity {
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
                 updateDateLabel(date);
-                checkDateSet(date);
             }
 
         };
@@ -118,7 +161,7 @@ public class AddSlots extends AppCompatActivity {
                 DatePickerDialog current = new DatePickerDialog(AddSlots.this, date_new, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
-                current.getDatePicker().setMinDate(System.currentTimeMillis());
+//                current.getDatePicker().setMinDate(System.currentTimeMillis());
                 current.show();
             }
         });
@@ -126,12 +169,11 @@ public class AddSlots extends AppCompatActivity {
 
         //Start time
         time.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                if (!checkDateSet(date)) {
                     // TODO Auto-generated method stub
-                    final Calendar mcurrentTime = Calendar.getInstance();
+//                    final Calendar mcurrentTime = Calendar.getInstance();
+                    Calendar mcurrentTime= (Calendar) myCalendar.clone();
                     int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                     int minute = mcurrentTime.get(Calendar.MINUTE);
                     TimePickerDialog mTimePicker;
@@ -154,7 +196,7 @@ public class AddSlots extends AppCompatActivity {
                     mTimePicker.setTitle("Select Start Time");
                     mTimePicker.show();
                 }
-            }
+
         });
 
         //End time
@@ -162,7 +204,9 @@ public class AddSlots extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                final Calendar endTime = Calendar.getInstance();
+//                Calendar endTime = Calendar.getInstance();
+//                Object endTime = myCalendar.clone();
+                Calendar endTime= (Calendar) myCalendar.clone();
                 int hour = endTime.get(Calendar.HOUR_OF_DAY);
                 int minute = endTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
@@ -178,6 +222,19 @@ public class AddSlots extends AppCompatActivity {
                         }
                         timeEnd.setText( selectedHour + " : " + selectedMinute + " " + AM_PM);
                         time_end = endTime.getTimeInMillis();
+//                        if (time_ <= endTime.getTimeInMillis()){
+//                            Toast.makeText(getApplicationContext(), "Please make sure end time is after start time!",
+//                                    Toast.LENGTH_LONG).show();
+//                            timeEnd.setError("End time should be after start time!");
+//                            endTimeBool = false;
+//
+//                        }
+//                        else if (time_ < endTime.getTimeInMillis()) {
+//                            time_end = endTime.getTimeInMillis();
+//                            timeEnd.setError(null);
+//                            endTimeBool = true;
+//                        }
+
                     }
                 }, hour, minute, false);//Yes 24 hour time
                 mTimePicker.setTitle("Select End Time");
@@ -191,21 +248,23 @@ public class AddSlots extends AppCompatActivity {
         addSlotButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Create a SlotsModel object and store data
-                final Object selectedItem = spinner.getSelectedItem();
-                createSlotObj(subjectName,location, selectedItem);
-                final SlotsModel slot = new SlotsModel(subject_name, location_, date_, time_, time_end, spinner_);
+                if (checkSubName(subjectName) && checkDateSet(date) && checkStartTime(time) &&
+                        checkEndTime(timeEnd) && checkLocation(location) && endTimeBool) {
+                    //Create a SlotsModel object and store data
+                    final Object selectedItem = spinner.getSelectedItem();
+                    createSlotObj(subjectName, location, selectedItem);
+                    final SlotsModel slot = new SlotsModel(subject_name, location_, date_, time_, time_end, spinner_);
 
-                sQLiteHelper.insertRecord(slot, AddSlots.this);
+                    sQLiteHelper.insertRecord(slot, AddSlots.this);
 
-                // Reset all inputs
-                subjectName.setText("");
-                date.setText("");
-                time.setText("");
-                timeEnd.setText("");
-                location.setText("");
-                spinner.setAdapter(adapter);
-
+                    // Reset all inputs
+                    subjectName.setText("");
+                    date.setText("");
+                    time.setText("");
+                    timeEnd.setText("");
+                    location.setText("");
+                    spinner.setAdapter(adapter);
+                }
         }
         });
 

@@ -4,25 +4,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.facebook.stetho.Stetho;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 
-
-public class ViewSlots extends AppCompatActivity {
+public class HistorySlots extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    //Sort list in ascending order according to date
+    //Sort list in descending order according to date
     private void sortList(ArrayList<SlotsModel> allSlots) {
         Collections.sort(allSlots, new Comparator<SlotsModel>() {
             public int compare(SlotsModel date1, SlotsModel date2) {
@@ -31,7 +26,7 @@ public class ViewSlots extends AppCompatActivity {
                 Long date_2 = new Long(date2.getDate_());
 
                 //for descending order swap return items
-                return date_1.compareTo(date_2);
+                return date_2.compareTo(date_1);
             }
         });
     }
@@ -40,8 +35,8 @@ public class ViewSlots extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_slots);
-        setTitle("View Slots");
+        setContentView(R.layout.activity_history_slots);
+        setTitle("History Slots");
         Stetho.initializeWithDefaults(this);
         RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
         recList.setHasFixedSize(true);
@@ -51,7 +46,7 @@ public class ViewSlots extends AppCompatActivity {
 
 
         //DB object creation
-        final SQLiteHelper sQLiteHelper = new SQLiteHelper(ViewSlots.this);
+        final SQLiteHelper sQLiteHelper = new SQLiteHelper(HistorySlots.this);
         ArrayList<SlotsModel> allSlots = sQLiteHelper.getAllRecords();
 
         sortList(allSlots);
@@ -60,7 +55,7 @@ public class ViewSlots extends AppCompatActivity {
             SlotsModel p = iter.next();
             final long time = p.getTime_();
             long currentTime = System.currentTimeMillis();
-            if (time < currentTime) iter.remove();
+            if (time > currentTime) iter.remove();
         }
 
         SlotsAdapter slotsAdapters = new SlotsAdapter(allSlots);
@@ -69,4 +64,5 @@ public class ViewSlots extends AppCompatActivity {
     }
 
 }
+
 
