@@ -2,10 +2,13 @@ package com.example.vegnish.assignment1;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
@@ -116,7 +119,21 @@ public class AddSlots extends AppCompatActivity {
             return true;
         }
     }
+    public void showDialog(Activity activity, String title, CharSequence message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity,R.style.DialogeTheme);
+        this.setFinishOnTouchOutside(false);
+        if (title != null) builder.setTitle(title);
 
+        builder.setMessage(message);
+        builder.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                startActivity(new Intent(AddSlots.this,AddSlots.class));
+            }
+        });
+        builder.setNegativeButton("No",null);
+        builder.show();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -276,6 +293,7 @@ public class AddSlots extends AppCompatActivity {
                     timeEnd.setText("");
                     location.setText("");
                     spinner.setAdapter(adapter);
+                    showDialog(AddSlots.this, "Slot Added", "Do you wish to add another slot?");
                 }
         }
         });

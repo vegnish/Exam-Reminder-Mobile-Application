@@ -41,7 +41,8 @@
         <Button
             android:id="@+id/addSlotsButton"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="63dp"
+            android:layout_marginTop="8dp"
             android:background="@color/colorPrimary"
             android:text="Add Slots"
             android:textColor="@color/colorFontWhite"
@@ -51,7 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView5"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
