@@ -161,7 +161,7 @@ public class AddSlots extends AppCompatActivity {
                 DatePickerDialog current = new DatePickerDialog(AddSlots.this, date_new, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
-//                current.getDatePicker().setMinDate(System.currentTimeMillis());
+                current.getDatePicker().setMinDate(System.currentTimeMillis());
                 current.show();
             }
         });
@@ -189,7 +189,9 @@ public class AddSlots extends AppCompatActivity {
                                     selectedHour -= 12;
                                 }
                             }
-                            time.setText(selectedHour + " : " + selectedMinute + " " + AM_PM);
+                            java.text.DecimalFormat twoDigitsFormat = new
+                                    java.text.DecimalFormat("#00");
+                            time.setText( twoDigitsFormat.format(selectedHour) + " : " + twoDigitsFormat.format(selectedMinute) + " " + AM_PM);
                             time_ = mcurrentTime.getTimeInMillis();
                         }
                     }, hour, minute, false);//Yes 24 hour time
@@ -220,7 +222,9 @@ public class AddSlots extends AppCompatActivity {
                             AM_PM = "PM";
                             if (selectedHour > 12) {selectedHour -= 12;}
                         }
-                        timeEnd.setText( selectedHour + " : " + selectedMinute + " " + AM_PM);
+                        java.text.DecimalFormat twoDigitsFormat = new
+                                java.text.DecimalFormat("#00");
+                        timeEnd.setText( twoDigitsFormat.format(selectedHour) + " : " + twoDigitsFormat.format(selectedMinute) + " " + AM_PM);
                         time_end = endTime.getTimeInMillis();
 //                        if (time_ <= endTime.getTimeInMillis()){
 //                            Toast.makeText(getApplicationContext(), "Please make sure end time is after start time!",
