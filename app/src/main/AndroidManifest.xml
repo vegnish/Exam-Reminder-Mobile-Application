@@ -11,11 +11,12 @@
         android:theme="@style/AppTheme">
 
         <!-- <activity android:name=".MainActivity"></activity> -->
-        <activity android:name=".AddSlots" />
+        <activity android:name=".ViewSlots" />
         <activity
             android:name=".Home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ViewSlots" />
+        <activity android:name=".AddSlots" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,9 +24,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Announcement"
-            android:label="Announcements"/>
-        <activity android:name=".HistorySlots"></activity>
+
+        <activity
+            android:name=".Announcement"
+            android:label="Announcements" />
+        <activity android:name=".HistorySlots" />
+
+        <activity android:name=".Welcome"></activity>
     </application>
 
 </manifest>
