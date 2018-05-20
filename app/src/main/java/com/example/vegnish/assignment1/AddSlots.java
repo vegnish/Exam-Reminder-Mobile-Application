@@ -43,7 +43,7 @@ public class AddSlots extends AppCompatActivity {
     private Spinner spinner;
     private static final String[]paths = {"Chief Invigilator", "Invigilator", "Standby Invigilator"};
     String subject_name, location_, spinner_;
-    long date_,  time_, time_end;
+    long date_,  time_, time_end_;
     final Calendar myCalendar = Calendar.getInstance();
     boolean endTimeBool = true;
 
@@ -171,34 +171,36 @@ public class AddSlots extends AppCompatActivity {
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    // TODO Auto-generated method stub
-//                    final Calendar mcurrentTime = Calendar.getInstance();
-                    Calendar mcurrentTime= (Calendar) myCalendar.clone();
-                    int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                    int minute = mcurrentTime.get(Calendar.MINUTE);
-                    TimePickerDialog mTimePicker;
-                    mTimePicker = new TimePickerDialog(AddSlots.this, new TimePickerDialog.OnTimeSetListener() {
-                        @Override
-                        public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                            String AM_PM;
-                            if (selectedHour < 12) {
-                                AM_PM = "AM";
-                            } else {
-                                AM_PM = "PM";
-                                if (selectedHour > 12) {
-                                    selectedHour -= 12;
-                                }
-                            }
-                            java.text.DecimalFormat twoDigitsFormat = new
-                                    java.text.DecimalFormat("#00");
-                            time.setText( twoDigitsFormat.format(selectedHour) + " : " + twoDigitsFormat.format(selectedMinute) + " " + AM_PM);
-                            time_ = mcurrentTime.getTimeInMillis();
+                // TODO Auto-generated method stub
+//                Date date = myCalendar.getTime();
+//                final Calendar startTime = Calendar.getInstance();
+//                Calendar startTime = myCalendar.setTime(date);
+                int hour = myCalendar.get(Calendar.HOUR_OF_DAY);
+                int minute = myCalendar.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(AddSlots.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        String AM_PM ;
+                        if(selectedHour < 12) {
+                            AM_PM = "AM";
+                        } else {
+                            AM_PM = "PM";
+                            if (selectedHour > 12) {selectedHour -= 12;}
                         }
-                    }, hour, minute, false);//Yes 24 hour time
-                    mTimePicker.setTitle("Select Start Time");
-                    mTimePicker.show();
-                }
+                        java.text.DecimalFormat twoDigitsFormat = new
+                                java.text.DecimalFormat("#00");
+                        time.setText( twoDigitsFormat.format(selectedHour) + " : " + twoDigitsFormat.format(selectedMinute) + " " + AM_PM);
+                        myCalendar.set(Calendar.HOUR, selectedHour);
+                        myCalendar.set(Calendar.MINUTE, selectedMinute);
+                        time_ = myCalendar.getTimeInMillis();
 
+                    }
+                }, hour, minute, false);//Yes 24 hour time
+                mTimePicker.setTitle("Select Start Time");
+                mTimePicker.show();
+
+            }
         });
 
         //End time
@@ -206,9 +208,8 @@ public class AddSlots extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-//                Calendar endTime = Calendar.getInstance();
-//                Object endTime = myCalendar.clone();
-                Calendar endTime= (Calendar) myCalendar.clone();
+                Calendar endTime = Calendar.getInstance();
+//                Calendar endTime= (Calendar) myCalendar.clone();
                 int hour = endTime.get(Calendar.HOUR_OF_DAY);
                 int minute = endTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
@@ -225,7 +226,9 @@ public class AddSlots extends AppCompatActivity {
                         java.text.DecimalFormat twoDigitsFormat = new
                                 java.text.DecimalFormat("#00");
                         timeEnd.setText( twoDigitsFormat.format(selectedHour) + " : " + twoDigitsFormat.format(selectedMinute) + " " + AM_PM);
-                        time_end = endTime.getTimeInMillis();
+                        endTime.set(Calendar.HOUR, selectedHour);
+                        endTime.set(Calendar.MINUTE, selectedMinute);
+                        time_end_ = endTime.getTimeInMillis();
 //                        if (time_ <= endTime.getTimeInMillis()){
 //                            Toast.makeText(getApplicationContext(), "Please make sure end time is after start time!",
 //                                    Toast.LENGTH_LONG).show();
@@ -242,6 +245,7 @@ public class AddSlots extends AppCompatActivity {
                     }
                 }, hour, minute, false);//Yes 24 hour time
                 mTimePicker.setTitle("Select End Time");
+
                 mTimePicker.show();
 
             }
@@ -257,7 +261,7 @@ public class AddSlots extends AppCompatActivity {
                     //Create a SlotsModel object and store data
                     final Object selectedItem = spinner.getSelectedItem();
                     createSlotObj(subjectName, location, selectedItem);
-                    final SlotsModel slot = new SlotsModel(subject_name, location_, date_, time_, time_end, spinner_);
+                    final SlotsModel slot = new SlotsModel(subject_name, location_, date_, time_, time_end_, spinner_);
 
                     sQLiteHelper.insertRecord(slot, AddSlots.this);
 
