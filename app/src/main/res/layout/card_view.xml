@@ -73,15 +73,39 @@
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="18dp"
             android:layout_marginStart="12dp"
-            android:text="2.00pm to 5.00pm"
+            android:text="2.00pm"
             android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/role_text"
             app:layout_constraintStart_toEndOf="@+id/imageView6"
             app:layout_constraintTop_toBottomOf="@+id/subject_name"
             app:layout_constraintVertical_bias="0.515" />
 
+
+        <TextView
+            android:id="@+id/to"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginStart="12dp"
+            android:text="to"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/role_text"
+            app:layout_constraintStart_toEndOf="@+id/time"
+            app:layout_constraintTop_toBottomOf="@+id/subject_name"
+            app:layout_constraintVertical_bias="0.515" />
+
+        <TextView
+            android:id="@+id/endTime"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginStart="12dp"
+            android:text="2.00pm"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/role_text"
+            app:layout_constraintStart_toEndOf="@+id/to"
+            app:layout_constraintTop_toBottomOf="@+id/subject_name"
+            app:layout_constraintVertical_bias="0.515" />
 
         <TextView
             android:id="@+id/location_text"

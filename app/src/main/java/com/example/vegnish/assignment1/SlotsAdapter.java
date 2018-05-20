@@ -47,8 +47,10 @@ public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.SlotsViewHol
         SlotsViewHolder.subjectName.setText(slotsObj.getSubjectName());
         String dateString = getDate(slotsObj.getDate_(), "dd/MM/yyyy");
         SlotsViewHolder.date.setText(dateString);
-        String timeString = getDate(slotsObj.getDate_(), "hh:mm");
+        String timeString = getDate(slotsObj.getTime_(), "hh:mm");
         SlotsViewHolder.time.setText(timeString);
+        String endTimeString = getDate(slotsObj.getTime_end(), "hh:mm");
+        SlotsViewHolder.endTime.setText(endTimeString);
         SlotsViewHolder.location.setText(slotsObj.getLocation_());
         SlotsViewHolder.role.setText(slotsObj.getSpinner_());
     }
@@ -66,6 +68,7 @@ public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.SlotsViewHol
         protected TextView subjectName;
         protected TextView date;
         protected TextView time;
+        protected TextView endTime;
         protected TextView location;
         protected TextView role;
 
@@ -74,6 +77,7 @@ public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.SlotsViewHol
             subjectName =  (TextView) v.findViewById(R.id.subject_name);
             date = (TextView)  v.findViewById(R.id.date);
             time = (TextView)  v.findViewById(R.id.time);
+            endTime = (TextView) v.findViewById(R.id.endTime);
             location = (TextView) v.findViewById(R.id.location_text);
             role = (TextView) v.findViewById(R.id.role_text);
         }
