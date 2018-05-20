@@ -49,6 +49,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 this.startActivity(intent_viewSlots);
                 break;
 
+            case R.id.nav_historyslot:
+                Intent intent_historySlot = new Intent(this, HistorySlots.class);
+                this.startActivity(intent_historySlot);
+                break;
+
             case R.id.nav_announcement:
                 Intent intent_announcement = new Intent(this, Announcement.class);
                 this.startActivity(intent_announcement);
