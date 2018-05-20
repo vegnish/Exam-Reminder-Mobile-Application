@@ -13,6 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -41,7 +42,7 @@ import java.util.prefs.Preferences;
 public class AddSlots extends AppCompatActivity {
     private Spinner spinner;
     private static final String[]paths = {"Chief Invigilator", "Invigilator", "Standby Invigilator"};
-    String subject_name, location_, spinner_ ;
+    String subject_name, location_, spinner_;
     long date_,  time_, time_end;
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -52,10 +53,25 @@ public class AddSlots extends AppCompatActivity {
         spinner_ = selectedItem.toString();
     }
     private void updateDateLabel(EditText date) {
-        String myFormat = "dd/MM/yy"; //In which you need put here
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         date.setText(sdf.format(myCalendar.getTime()));
+    }
+    public boolean checkDateSet(EditText date){
+        String strDate = date.getText().toString();
+        if (TextUtils.isEmpty(strDate)) {
+            date.setFocusable(true);
+            date.setError("Please choose a date first!");
+            date.requestFocus();
+            return true;
+        }
+        else if (!TextUtils.isEmpty(strDate)) {
+            date.requestFocus();
+            date.setError(null);
+            return false;
+        }
+        return true;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,46 +105,55 @@ public class AddSlots extends AppCompatActivity {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
                 updateDateLabel(date);
+                checkDateSet(date);
             }
 
         };
-        date.setOnClickListener(new View.OnClickListener() {
 
-            @Override
+        date.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                new DatePickerDialog(AddSlots.this, date_new, myCalendar
+                DatePickerDialog current = new DatePickerDialog(AddSlots.this, date_new, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                current.getDatePicker().setMinDate(System.currentTimeMillis());
+                current.show();
             }
         });
 
+
         //Start time
         time.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                final Calendar mcurrentTime = Calendar.getInstance();
-                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mcurrentTime.get(Calendar.MINUTE);
-                TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(AddSlots.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        String AM_PM ;
-                        if(selectedHour < 12) {
-                            AM_PM = "AM";
-                        } else {
-                            AM_PM = "PM";
-                            if (selectedHour > 12) {selectedHour -= 12;}
+                if (!checkDateSet(date)) {
+                    // TODO Auto-generated method stub
+                    final Calendar mcurrentTime = Calendar.getInstance();
+                    int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                    int minute = mcurrentTime.get(Calendar.MINUTE);
+                    TimePickerDialog mTimePicker;
+                    mTimePicker = new TimePickerDialog(AddSlots.this, new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                            String AM_PM;
+                            if (selectedHour < 12) {
+                                AM_PM = "AM";
+                            } else {
+                                AM_PM = "PM";
+                                if (selectedHour > 12) {
+                                    selectedHour -= 12;
+                                }
+                            }
+                            time.setText(selectedHour + " : " + selectedMinute + " " + AM_PM);
+                            time_ = mcurrentTime.getTimeInMillis();
                         }
-                        time.setText( selectedHour + " : " + selectedMinute + " " + AM_PM);
-                        time_ = mcurrentTime.getTimeInMillis();
-                    }
-                }, hour, minute, false);//Yes 24 hour time
-                mTimePicker.setTitle("Select Start Time");
-                mTimePicker.show();
+                    }, hour, minute, false);//Yes 24 hour time
+                    mTimePicker.setTitle("Select Start Time");
+                    mTimePicker.show();
+                }
             }
         });
 
