@@ -184,8 +184,10 @@ public class AddSlots extends AppCompatActivity {
                         String AM_PM ;
                         if(selectedHour < 12) {
                             AM_PM = "AM";
+                            myCalendar.set(Calendar.AM_PM, Calendar.AM);
                         } else {
                             AM_PM = "PM";
+                            myCalendar.set(Calendar.AM_PM, Calendar.PM);
                             if (selectedHour > 12) {selectedHour -= 12;}
                         }
                         java.text.DecimalFormat twoDigitsFormat = new
@@ -219,8 +221,10 @@ public class AddSlots extends AppCompatActivity {
                         String AM_PM ;
                         if(selectedHour < 12) {
                             AM_PM = "AM";
+                            endTime.set(Calendar.AM_PM, Calendar.AM);
                         } else {
                             AM_PM = "PM";
+                            endTime.set(Calendar.AM_PM, Calendar.PM);
                             if (selectedHour > 12) {selectedHour -= 12;}
                         }
                         java.text.DecimalFormat twoDigitsFormat = new
