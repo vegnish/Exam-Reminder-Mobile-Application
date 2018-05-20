@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,9 +48,9 @@ public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.SlotsViewHol
         SlotsViewHolder.subjectName.setText(slotsObj.getSubjectName());
         String dateString = getDate(slotsObj.getDate_(), "dd/MM/yyyy");
         SlotsViewHolder.date.setText(dateString);
-        String timeString = getDate(slotsObj.getTime_(), "hh:mm");
+        String timeString = getDate(slotsObj.getTime_(), "hh:mm aa");
         SlotsViewHolder.time.setText(timeString);
-        String endTimeString = getDate(slotsObj.getTime_end(), "hh:mm");
+        String endTimeString = getDate(slotsObj.getTime_end(), "hh:mm aa");
         SlotsViewHolder.endTime.setText(endTimeString);
         SlotsViewHolder.location.setText(slotsObj.getLocation_());
         SlotsViewHolder.role.setText(slotsObj.getSpinner_());
