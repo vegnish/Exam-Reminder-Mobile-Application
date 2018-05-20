@@ -48,6 +48,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 Intent intent_viewSlots = new Intent(this, ViewSlots.class);
                 this.startActivity(intent_viewSlots);
                 break;
+
+            case R.id.nav_announcement:
+                Intent intent_announcement = new Intent(this, Announcement.class);
+                this.startActivity(intent_announcement);
+                break;
+
             case R.id.nav_aboutus:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AboutusFragment()).commit();

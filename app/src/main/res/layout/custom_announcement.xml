@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/ivMusic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/txtType"
+        android:src="@drawable/ic_music" />
+
+    <TextView
+        android:id="@+id/txtType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtDescription"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/txtDescription"
+        android:layout_marginTop="5dp"
+        android:text="Accouncement Type"
+        android:textColor="#7019c1"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtDescription"
+        android:textColor="#259e06"
+        android:textSize="18sp"
+        android:text="Announcement Description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_alignBottom="@+id/ivMusic"
+        android:layout_toRightOf="@+id/ivMusic"
+        android:layout_toEndOf="@+id/ivMusic" />
+
+    <ImageView
+        android:id="@+id/ivPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/ivStop"
+        android:layout_marginStart="83dp"
+        android:src="@drawable/ic_play" />
+
+    <ImageView
+        android:id="@+id/ivStop"
+        android:layout_width="38dp"
+        android:layout_height="32dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="68dp"
+        android:src="@drawable/ic_stop" />
+
+
+</RelativeLayout>
