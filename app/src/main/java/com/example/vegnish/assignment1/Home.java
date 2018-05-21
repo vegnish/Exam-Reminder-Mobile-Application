@@ -37,7 +37,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_home:
-                Intent intent_home = new Intent(this, Home.class);
+                Intent intent_home = new Intent(this, Welcome.class);
                 this.startActivity(intent_home);
                 break;
             case R.id.nav_addslot:

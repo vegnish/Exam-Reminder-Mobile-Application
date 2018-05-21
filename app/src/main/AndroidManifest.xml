@@ -17,6 +17,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AddSlots" />
 
+        <!--<activity android:name=".HistorySlots" />-->
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
