@@ -125,13 +125,13 @@ public class AddSlots extends AppCompatActivity {
         if (title != null) builder.setTitle(title);
 
         builder.setMessage(message);
-        builder.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Yes",null);
+        builder.setNegativeButton("No",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
-                startActivity(new Intent(AddSlots.this,AddSlots.class));
+                startActivity(new Intent(AddSlots.this,Home.class));
             }
         });
-        builder.setNegativeButton("No",null);
         builder.show();
     }
     @Override
@@ -293,6 +293,7 @@ public class AddSlots extends AppCompatActivity {
                     timeEnd.setText("");
                     location.setText("");
                     spinner.setAdapter(adapter);
+                    new SetAlarm().alarmSetter(AddSlots.this, time_);
                     showDialog(AddSlots.this, "Slot Added", "Do you wish to add another slot?");
                 }
         }
