@@ -5,7 +5,7 @@
     android:id="@+id/announcement_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Announcement"
+    tools:context="mobileapptaylors.example.vegnish.MAD_assignment1.mobileapptaylors.example.vegnish.MAD_assignment1.Announcement"
     tools:layout_editor_absoluteY="81dp">
 
     <ListView
