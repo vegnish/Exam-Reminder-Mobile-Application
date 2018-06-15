@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:alpha="0.9"
     android:background="@mipmap/taylors_view"
-    tools:context=".MainActivity"
+    tools:context="mobileapptaylors.example.vegnish.MAD_assignment1.mobileapptaylors.example.vegnish.MAD_assignment1.MainActivity"
     tools:layout_editor_absoluteY="81dp">
 
     <ImageView

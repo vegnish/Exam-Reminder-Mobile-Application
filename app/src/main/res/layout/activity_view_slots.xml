@@ -3,7 +3,7 @@
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".ViewSlots">
+tools:context="mobileapptaylors.example.vegnish.MAD_assignment1.mobileapptaylors.example.vegnish.MAD_assignment1.ViewSlots">
 <android.support.v7.widget.RecyclerView
     android:id="@+id/cardList"
     android:layout_width="match_parent"

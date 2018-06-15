@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.vegnish.assignment1">
+    package="mobileapptaylors.example.vegnish.MAD_assignment1">
     <!--wake lock so the phone can be activated-->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -16,12 +16,12 @@
         android:theme="@style/AppTheme">
 
         <!--receiver called when the alarm is executed-->
-        <receiver android:name="AlarmBroadcaster" />
+        <receiver android:name="mobileapptaylors.example.vegnish.MAD_assignment1.AlarmBroadcaster" />
         <service
-            android:name="NotificationTrigger"
+            android:name="mobileapptaylors.example.vegnish.MAD_assignment1.NotificationTrigger"
             android:exported="false" />
         <receiver
-            android:name="DeviceBootReceiver"
+            android:name="mobileapptaylors.example.vegnish.MAD_assignment1.DeviceBootReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -29,15 +29,15 @@
         </receiver>
 
         <!-- <activity android:name=".MainActivity"></activity> -->
-        <activity android:name=".ViewSlots" />
+        <activity android:name="mobileapptaylors.example.vegnish.MAD_assignment1.ViewSlots" />
         <activity
-            android:name=".Home"
+            android:name="mobileapptaylors.example.vegnish.MAD_assignment1.Home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddSlots" />
+        <activity android:name="mobileapptaylors.example.vegnish.MAD_assignment1.AddSlots" />
 
         <!--<activity android:name=".HistorySlots" />-->
 
-        <activity android:name=".MainActivity">
+        <activity android:name="mobileapptaylors.example.vegnish.MAD_assignment1.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,11 +46,11 @@
         </activity>
 
         <activity
-            android:name=".Announcement"
+            android:name="mobileapptaylors.example.vegnish.MAD_assignment1.Announcement"
             android:label="Announcements" />
-        <activity android:name=".HistorySlots" />
+        <activity android:name="mobileapptaylors.example.vegnish.MAD_assignment1.HistorySlots" />
 
-        <activity android:name=".Welcome"></activity>
+        <activity android:name="mobileapptaylors.example.vegnish.MAD_assignment1.Welcome"></activity>
     </application>
 
 </manifest>

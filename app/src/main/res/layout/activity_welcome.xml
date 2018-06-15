@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:alpha="0.75"
     android:background="@drawable/background_red"
-    tools:context=".Welcome"
+    tools:context="mobileapptaylors.example.vegnish.MAD_assignment1.mobileapptaylors.example.vegnish.MAD_assignment1.Welcome"
     tools:layout_editor_absoluteY="81dp">
 
     <android.support.v7.widget.RecyclerView
