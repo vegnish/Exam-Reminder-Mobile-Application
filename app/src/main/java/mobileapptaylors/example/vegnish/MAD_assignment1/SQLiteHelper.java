@@ -55,6 +55,12 @@ public class SQLiteHelper extends SQLiteOpenHelper{
         Toast.makeText(context, "Slot added!",
                 Toast.LENGTH_LONG).show();
     }
+    public void deleteSlot(long startTime) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, COLUMN_TIME + " = ?",
+                new String[]{String.valueOf(startTime)});
+        db.close();
+    }
     public ArrayList<SlotsModel> getAllRecords() {
         database = this.getReadableDatabase();
         Cursor cursor = database.query(TABLE_NAME, null, null, null, null, null, null);

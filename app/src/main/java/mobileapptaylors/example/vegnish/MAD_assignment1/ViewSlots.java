@@ -59,7 +59,7 @@ public class ViewSlots extends AppCompatActivity {
             if (time < currentTime) iter.remove();
         }
 
-        SlotsAdapter slotsAdapters = new SlotsAdapter(allSlots);
+        SlotsAdapter_viewSlot slotsAdapters = new SlotsAdapter_viewSlot(allSlots);
         recList.setAdapter(slotsAdapters);
 
     }

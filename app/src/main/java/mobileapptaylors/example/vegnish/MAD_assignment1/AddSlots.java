@@ -19,6 +19,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.facebook.stetho.Stetho;
+import com.tsongkha.spinnerdatepicker.SpinnerDatePickerDialogBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -173,11 +174,22 @@ public class AddSlots extends AppCompatActivity {
         date.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                DatePickerDialog current = new DatePickerDialog(AddSlots.this, date_new, myCalendar
+                DatePickerDialog current = new DatePickerDialog(AddSlots.this, R.style.DatePickerDialogTheme,date_new, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
                 current.getDatePicker().setMinDate(System.currentTimeMillis());
+                current.getDatePicker().setLayoutMode(1);
+
                 current.show();
+//                new SpinnerDatePickerDialogBuilder()
+//                        .context(AddSlots.this)
+//                        .showTitle(true)
+//                        .showDay(true)
+//                        .defaultDate(2017, 0, 1)
+//                        .maxDate(2020, 0, 1)
+//                        .minDate(2000, 0, 1)
+//                        .build()
+//                        .show();
             }
         });
 
@@ -190,7 +202,7 @@ public class AddSlots extends AppCompatActivity {
                 int hour = myCalendar.get(Calendar.HOUR_OF_DAY);
                 int minute = myCalendar.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(AddSlots.this, new TimePickerDialog.OnTimeSetListener() {
+                mTimePicker = new TimePickerDialog(AddSlots.this,0, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         String AM_PM ;

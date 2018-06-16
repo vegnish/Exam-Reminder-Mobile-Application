@@ -12,6 +12,8 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:timePickerDialogTheme">@style/PickerDialogCustom</item>
+        <item name="android:datePickerDialogTheme">@style/PickerDialogCustom</item>
     </style>
 
     <style name="DialogeTheme" parent="Theme.AppCompat.Dialog.Alert">
@@ -19,5 +21,50 @@
         <item name="android:buttonBarPositiveButtonStyle" tools:targetApi="lollipop">@color/colorPrimaryDark</item>
         <item name="android:buttonBarNegativeButtonStyle" tools:targetApi="lollipop">@color/colorPrimary</item>
         <item name="android:button">@color/colorFontWhite</item>
+        <item name="android:datePickerMode">spinner</item>
+        <item name="android:calendarViewShown">false</item>
+    </style>
+
+    <style name="PickerDialogCustom" parent="AlertDialogCustom">
+        <!--<item name="android:textColor">@color/colorPrimary</item>-->
+        <!--<item name="android:textColorPrimary">@color/colorPrimaryDark</item>-->
+        <!--<item name="colorControlNormal">@color/greyLight500</item>-->
+        <!--<item name="android:layout_margin">2dp</item>-->
+        <item name="android:datePickerMode">spinner</item>
+        <item name="android:timePickerMode">spinner</item>
+        <item name="android:calendarViewShown">false</item>
+    </style>
+
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:positiveButtonText">@color/colorPrimary</item>
+        <!--<item name="android:negativeButtonText">@color/greyDark200</item>-->
+        <!--<item name="buttonBarNegativeButtonStyle">@style/negativeButton</item>-->
+        <item name="android:datePickerStyle">@style/PickerDialogCustom</item>
+    </style>
+
+    <!--<style name="MySpinnerDatePickerStyle" parent="android:Theme.Material.Dialog">-->
+        <!--<item name="android:datePickerStyle">@style/MySpinnerDatePicker</item>-->
+    <!--</style>-->
+
+    <!--<style name="MySpinnerDatePicker" parent="android:Widget.Material.DatePicker">-->
+        <!--<item name="android:datePickerMode">spinner</item>-->
+    <!--</style>-->
+
+    <!--<style name="NumberPickerStyle">-->
+        <!--<item name="android:textSize">22dp</item>-->
+        <!--<item name="android:textColorPrimary">@color/colorAccent</item>-->
+        <!--<item name="android:colorControlNormal" tools:targetApi="lollipop">@color/colorAccent</item>-->
+    <!--</style>-->
+    <style name="DatePickerDialogTheme" parent="android:Theme.Holo.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
     </style>
 </resources>
