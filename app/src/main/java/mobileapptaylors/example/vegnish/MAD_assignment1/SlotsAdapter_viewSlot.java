@@ -3,7 +3,9 @@ package mobileapptaylors.example.vegnish.MAD_assignment1;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
+import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -56,7 +58,7 @@ public class SlotsAdapter_viewSlot extends RecyclerView.Adapter<SlotsAdapter_vie
     @Override
     public void onBindViewHolder(SlotsViewHolder SlotsViewHolder, int i) {
         SlotsModel slotsObj = slotsList.get(i);
-        SlotsViewHolder.subjectName.setText(slotsObj.getSubjectName());
+        int id_ = slotsObj.getId();
         String dateString = getDate(slotsObj.getDate_(), "dd/MM/yyyy");
         long dateLongString = slotsObj.getDate_();
         SlotsViewHolder.date.setText(dateString);
@@ -71,28 +73,59 @@ public class SlotsAdapter_viewSlot extends RecyclerView.Adapter<SlotsAdapter_vie
         SlotsViewHolder.menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("clickkk", "onClick: "+ SlotsViewHolder.subjectName.getText()+ " "+ SlotsViewHolder.time.getText());
+                Log.d("clickkk", "onClick: "+ " "+ SlotsViewHolder.time.getText());
                 final AppCompatActivity activity=(AppCompatActivity)v.getContext();
-                showDialog(activity, "Update or Delete", "What do you wish to do?", dateLongString);
+                showDialog(activity, "Update or Delete", "What do you wish to do?", id_,i);
             }
         });
 
     }
-    public void showDialog(Activity activity, String title, CharSequence message, long dateLongString) {
+    public void showDialog(Activity activity, String title, CharSequence message, int id_, int i) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity, mobileapptaylors.example.vegnish.MAD_assignment1.R.style.DialogeTheme);
 //        this.setFinishOnTouchOutside(false);
         if (title != null) builder.setTitle(title);
 
         builder.setMessage(message);
-        builder.setPositiveButton("Update",null);
+        builder.setPositiveButton("Update",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+//                startActivity(new Intent(ViewSlots.this,Home.class));
+                //DB object creation
+                final SQLiteHelper sQLiteHelper = new SQLiteHelper(activity);
+                Log.d("startTime", "onClick:");
+                SlotsModel slotsObj = slotsList.get(i);
+                FragmentTransaction fragmentTransaction;
+                FragmentManager fragmentManager;
+
+                Class fragmentClass=null;
+                Fragment mFragment;
+
+//                Notes notes_fragment;  // fragment instance of current fragment
+
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+                mFragment = new updateSlot.OnFragmentInteractionListener() // CreateNewNote is fragment you want to display
+
+                fragmentTransaction.replace(R.id.fragment_container, mFragment);  // content_fragment is id of FrameLayout(XML file) where fragment will be displayed
+
+                fragmentTransaction.addToBackStack(frag_no); //add fragment to stack
+                fragmentTransaction.hide(currentFragment).commit();  // hide current fragment
+                slotsObj.setLocation_("ffff");
+                sQLiteHelper.updateSlot(slotsObj,id_);
+                Intent refresh = new Intent(activity, ViewSlots.class);
+                activity.startActivity(refresh);
+                Log.d("Refresher", "onClick: Refreshed");
+                activity.finish();
+            }
+        });
         builder.setNegativeButton("Delete",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
 //                startActivity(new Intent(ViewSlots.this,Home.class));
                 //DB object creation
                 final SQLiteHelper sQLiteHelper = new SQLiteHelper(activity);
-                Log.d("startTime", "onClick:" + dateLongString);
-                sQLiteHelper.deleteSlot(dateLongString);
+                Log.d("startTime", "onClick:");
+                sQLiteHelper.deleteSlot(id_);
                 Intent refresh = new Intent(activity, ViewSlots.class);
                 activity.startActivity(refresh);
                 Log.d("Refresher", "onClick: Refreshed");
@@ -113,7 +146,6 @@ public class SlotsAdapter_viewSlot extends RecyclerView.Adapter<SlotsAdapter_vie
     }
 
     public static class SlotsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        protected TextView subjectName;
         protected TextView date;
         protected TextView time;
         protected TextView endTime;
@@ -123,7 +155,6 @@ public class SlotsAdapter_viewSlot extends RecyclerView.Adapter<SlotsAdapter_vie
 
         public SlotsViewHolder(View v) {
             super(v);
-            subjectName =  (TextView) v.findViewById(R.id.subject_name);
             date = (TextView)  v.findViewById(R.id.date);
             time = (TextView)  v.findViewById(R.id.time);
             endTime = (TextView) v.findViewById(R.id.endTime);

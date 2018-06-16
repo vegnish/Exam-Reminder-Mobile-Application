@@ -17,7 +17,7 @@ public class SQLiteHelper extends SQLiteOpenHelper{
     }
 
     public static final String TABLE_NAME = "SLOTS";
-    public static final String COLUMN_SUBJECT_NAME = "SUBJECT_NAME";
+    public static final String COLUMN_ID = "ID";
     public static final String COLUMN_DATE = "DATE";
     public static final String COLUMN_TIME = "TIME_START";
     public static final String COLUMN_TIME_END = "TIME_END";
@@ -26,7 +26,8 @@ public class SQLiteHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " ( " + COLUMN_SUBJECT_NAME + " VARCHAR,"
+        db.execSQL("create table " + TABLE_NAME + " ( "
+                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
                 + COLUMN_DATE + " INTEGER ,"
                 + COLUMN_TIME + " INTEGER,"
                 + COLUMN_TIME_END + " INTEGER ,"
@@ -44,7 +45,6 @@ public class SQLiteHelper extends SQLiteOpenHelper{
     public void insertRecord(SlotsModel slots, Context context) {
         database = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_SUBJECT_NAME, slots.getSubjectName());
         contentValues.put(COLUMN_DATE, slots.getDate_());
         contentValues.put(COLUMN_TIME, slots.getTime_());
         contentValues.put(COLUMN_TIME_END, slots.getTime_end());
@@ -55,12 +55,28 @@ public class SQLiteHelper extends SQLiteOpenHelper{
         Toast.makeText(context, "Slot added!",
                 Toast.LENGTH_LONG).show();
     }
-    public void deleteSlot(long startTime) {
+    public void deleteSlot(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NAME, COLUMN_TIME + " = ?",
-                new String[]{String.valueOf(startTime)});
+        db.delete(TABLE_NAME, COLUMN_ID + " = ?",
+                new String[]{String.valueOf(id)});
         db.close();
     }
+
+    public int updateSlot(SlotsModel slots, int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_DATE, slots.getDate_());
+        contentValues.put(COLUMN_TIME, slots.getTime_());
+        contentValues.put(COLUMN_TIME_END, slots.getTime_end());
+        contentValues.put(COLUMN_LOCATION, slots.getLocation_());
+        contentValues.put(COLUMN_SPINNER, slots.getSpinner_());
+
+        // updating row
+        return db.update(TABLE_NAME, contentValues, COLUMN_ID + " = ?",
+                new String[]{String.valueOf(id)});
+    }
+
     public ArrayList<SlotsModel> getAllRecords() {
         database = this.getReadableDatabase();
         Cursor cursor = database.query(TABLE_NAME, null, null, null, null, null, null);
@@ -72,7 +88,7 @@ public class SQLiteHelper extends SQLiteOpenHelper{
                 cursor.moveToNext();
 
                 slotsModel = new SlotsModel();
-                slotsModel.setSubjectName(cursor.getString(0));
+                slotsModel.setId(cursor.getInt(0));
                 slotsModel.setDate_(cursor.getLong(1));
                 slotsModel.setTime_(cursor.getLong(2));
                 slotsModel.setTime_end(cursor.getLong(3));

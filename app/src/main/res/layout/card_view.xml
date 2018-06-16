@@ -33,25 +33,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.05" />
 
-        <TextView
-            android:id="@+id/subject_name"
-            android:layout_width="352dp"
-            android:layout_height="33dp"
-            android:layout_marginBottom="32dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Mobile App Development"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.272" />
-
         <View
             android:id="@+id/color_bar"
             android:layout_width="22dp"
@@ -74,37 +55,40 @@
             android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
             android:text="2.00pm"
             android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/role_text"
             app:layout_constraintStart_toEndOf="@+id/imageView6"
-            app:layout_constraintTop_toBottomOf="@+id/subject_name"
-            app:layout_constraintVertical_bias="0.515" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.592" />
 
 
         <TextView
             android:id="@+id/to"
             android:layout_width="wrap_content"
             android:layout_height="18dp"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="to"
             android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/role_text"
             app:layout_constraintStart_toEndOf="@+id/time"
-            app:layout_constraintTop_toBottomOf="@+id/subject_name"
-            app:layout_constraintVertical_bias="0.515" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.592" />
 
         <TextView
             android:id="@+id/endTime"
             android:layout_width="wrap_content"
             android:layout_height="18dp"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="2.00pm"
             android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/role_text"
             app:layout_constraintStart_toEndOf="@+id/to"
-            app:layout_constraintTop_toBottomOf="@+id/subject_name"
-            app:layout_constraintVertical_bias="0.515" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.592" />
 
         <TextView
             android:id="@+id/location_text"
@@ -129,22 +113,21 @@
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.056"
+            app:layout_constraintHorizontal_bias="0.059"
             app:layout_constraintStart_toEndOf="@+id/imageView10"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.903" />
 
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="44dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.636"
+            app:layout_constraintVertical_bias="0.449"
             app:srcCompat="@drawable/ic_access_time_black_24dp" />
 
         <ImageView
@@ -163,12 +146,12 @@
             android:id="@+id/imageView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="24dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.072"
+            app:layout_constraintHorizontal_bias="0.104"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic_person_black_24dp" />
 

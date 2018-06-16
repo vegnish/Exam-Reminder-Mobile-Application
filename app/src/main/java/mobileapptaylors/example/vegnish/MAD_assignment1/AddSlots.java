@@ -30,14 +30,12 @@ import java.util.Locale;
 public class AddSlots extends AppCompatActivity {
     private Spinner spinner;
     private static final String[]paths = {"Chief Invigilator", "Invigilator", "Standby Invigilator"};
-    String subject_name, location_, spinner_;
+    String location_, spinner_;
     long date_,  time_, time_end_, temp_EndTime;
     final Calendar myCalendar = Calendar.getInstance();
     boolean endTimeBool = true;
 
-
-    public void createSlotObj(EditText subjectName, EditText location, Object selectedItem){
-        subject_name = subjectName.getText().toString();
+    public void createSlotObj(EditText location, Object selectedItem){
         date_ =  myCalendar.getTimeInMillis();
         location_ = location.getText().toString();
         spinner_ = selectedItem.toString();
@@ -48,14 +46,7 @@ public class AddSlots extends AppCompatActivity {
 
         date.setText(sdf.format(myCalendar.getTime()));
     }
-    public boolean checkSubName(EditText subjectName){
-        String subName = subjectName.getText().toString();
-        if (TextUtils.isEmpty(subName)){
-            subjectName.setError("Please fill up");
-            return false;
-        }
-        return true;
-    }
+
     public boolean checkDateSet(EditText date){
         String strDate = date.getText().toString();
         if (TextUtils.isEmpty(strDate)) {
@@ -156,6 +147,7 @@ public class AddSlots extends AppCompatActivity {
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         final EditText subjectName = (EditText) findViewById(mobileapptaylors.example.vegnish.MAD_assignment1.R.id.subjectName);
+//        final EditText subjectName = (EditText) findViewById(mobileapptaylors.example.vegnish.MAD_assignment1.R.id.subjectName);
         final EditText date = (EditText) findViewById(mobileapptaylors.example.vegnish.MAD_assignment1.R.id.date);
         final EditText time = (EditText) findViewById(mobileapptaylors.example.vegnish.MAD_assignment1.R.id.time);
         final EditText timeEnd = (EditText) findViewById(mobileapptaylors.example.vegnish.MAD_assignment1.R.id.time_end);
@@ -297,17 +289,16 @@ public class AddSlots extends AppCompatActivity {
         addSlotButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkSubName(subjectName) && checkDateSet(date) && checkStartTime(time) &&
+                if ( checkDateSet(date) && checkStartTime(time) &&
                         checkEndTime(timeEnd) && checkLocation(location) && checkEndTimeValidation(timeEnd, time_, temp_EndTime)) {
                     //Create a SlotsModel object and store data
                     final Object selectedItem = spinner.getSelectedItem();
-                    createSlotObj(subjectName, location, selectedItem);
-                    final SlotsModel slot = new SlotsModel(subject_name, location_, date_, time_, time_end_, spinner_);
+                    createSlotObj(location, selectedItem);
+                    final SlotsModel slot = new SlotsModel(location_, date_, time_, time_end_, spinner_);
 
                     sQLiteHelper.insertRecord(slot, AddSlots.this);
 
                     // Reset all inputs
-                    subjectName.setText("");
                     date.setText("");
                     time.setText("");
                     timeEnd.setText("");

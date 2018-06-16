@@ -45,7 +45,6 @@ public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.SlotsViewHol
     @Override
     public void onBindViewHolder(SlotsViewHolder SlotsViewHolder, int i) {
         SlotsModel slotsObj = slotsList.get(i);
-        SlotsViewHolder.subjectName.setText(slotsObj.getSubjectName());
         String dateString = getDate(slotsObj.getDate_(), "dd/MM/yyyy");
         SlotsViewHolder.date.setText(dateString);
         String timeString = getDate(slotsObj.getTime_(), "hh:mm aa");
@@ -66,7 +65,6 @@ public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.SlotsViewHol
     }
 
     public static class SlotsViewHolder extends RecyclerView.ViewHolder {
-        protected TextView subjectName;
         protected TextView date;
         protected TextView time;
         protected TextView endTime;
@@ -75,7 +73,6 @@ public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.SlotsViewHol
 
         public SlotsViewHolder(View v) {
             super(v);
-            subjectName =  (TextView) v.findViewById(R.id.subject_name);
             date = (TextView)  v.findViewById(R.id.date);
             time = (TextView)  v.findViewById(R.id.time);
             endTime = (TextView) v.findViewById(R.id.endTime);
