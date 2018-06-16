@@ -94,22 +94,7 @@ public class SlotsAdapter_viewSlot extends RecyclerView.Adapter<SlotsAdapter_vie
                 final SQLiteHelper sQLiteHelper = new SQLiteHelper(activity);
                 Log.d("startTime", "onClick:");
                 SlotsModel slotsObj = slotsList.get(i);
-                FragmentTransaction fragmentTransaction;
-                FragmentManager fragmentManager;
 
-                Class fragmentClass=null;
-                Fragment mFragment;
-
-//                Notes notes_fragment;  // fragment instance of current fragment
-
-                fragmentTransaction = getSupportFragmentManager().beginTransaction();
-
-                mFragment = new updateSlot.OnFragmentInteractionListener() // CreateNewNote is fragment you want to display
-
-                fragmentTransaction.replace(R.id.fragment_container, mFragment);  // content_fragment is id of FrameLayout(XML file) where fragment will be displayed
-
-                fragmentTransaction.addToBackStack(frag_no); //add fragment to stack
-                fragmentTransaction.hide(currentFragment).commit();  // hide current fragment
                 slotsObj.setLocation_("ffff");
                 sQLiteHelper.updateSlot(slotsObj,id_);
                 Intent refresh = new Intent(activity, ViewSlots.class);

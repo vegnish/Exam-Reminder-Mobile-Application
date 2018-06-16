@@ -146,7 +146,7 @@ public class AddSlots extends AppCompatActivity {
         setTitle("Add Slots");
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        final EditText subjectName = (EditText) findViewById(mobileapptaylors.example.vegnish.MAD_assignment1.R.id.subjectName);
+//        final EditText subjectName = (EditText) findViewById(mobileapptaylors.example.vegnish.MAD_assignment1.R.id.subjectName);
 //        final EditText subjectName = (EditText) findViewById(mobileapptaylors.example.vegnish.MAD_assignment1.R.id.subjectName);
         final EditText date = (EditText) findViewById(mobileapptaylors.example.vegnish.MAD_assignment1.R.id.date);
         final EditText time = (EditText) findViewById(mobileapptaylors.example.vegnish.MAD_assignment1.R.id.time);
