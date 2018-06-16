@@ -24,20 +24,6 @@
         tools:context="mobileapptaylors.example.vegnish.MAD_assignment1.mobileapptaylors.example.vegnish.MAD_assignment1.AddSlots"
         tools:layout_editor_absoluteY="81dp">
 
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="28dp"
-            android:layout_height="43dp"
-            android:layout_marginBottom="34dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="25dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageView2"
-            app:layout_constraintEnd_toStartOf="@+id/subjectName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_subject_black_24dp" />
-
         <Button
             android:id="@+id/addSlotsButton"
             android:layout_width="0dp"
@@ -62,10 +48,11 @@
             android:layout_marginBottom="29dp"
             android:layout_marginEnd="25dp"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintBottom_toTopOf="@+id/imageView3"
             app:layout_constraintEnd_toStartOf="@+id/date"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView7"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_date_range_black_24dp" />
 
         <EditText
@@ -81,7 +68,7 @@
             app:layout_constraintBottom_toTopOf="@+id/time"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/subjectName" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -162,20 +149,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView5"
             app:layout_constraintTop_toBottomOf="@+id/location" />
-
-        <EditText
-            android:id="@+id/subjectName"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="31dp"
-            android:ems="10"
-            android:hint="Subject Name"
-            android:inputType="text|textCapWords"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/date"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView7"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/location"
