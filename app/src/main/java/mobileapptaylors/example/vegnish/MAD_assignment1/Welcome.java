@@ -1,9 +1,12 @@
 package mobileapptaylors.example.vegnish.MAD_assignment1;
 
+import android.app.ActionBar;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.facebook.stetho.Stetho;
@@ -19,6 +22,7 @@ import java.util.Iterator;
 
 public class Welcome extends AppCompatActivity {
 
+
     //Sort list in ascending order according to date
     private void sortList(ArrayList<SlotsModel> allSlots) {
         Collections.sort(allSlots, new Comparator<SlotsModel>() {
@@ -33,11 +37,20 @@ public class Welcome extends AppCompatActivity {
         });
     }
 
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), Home.class);
+        startActivityForResult(myIntent, 0);
+        return true;
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(mobileapptaylors.example.vegnish.MAD_assignment1.R.layout.activity_welcome);
         setTitle("Welcome Screen");
+//        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(true);
         Stetho.initializeWithDefaults(this);
         RecyclerView recList = (RecyclerView) findViewById(mobileapptaylors.example.vegnish.MAD_assignment1.R.id.next_slot);
         recList.setHasFixedSize(true);

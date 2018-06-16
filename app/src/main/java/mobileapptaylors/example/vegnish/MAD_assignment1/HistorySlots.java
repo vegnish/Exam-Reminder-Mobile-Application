@@ -1,9 +1,11 @@
 package mobileapptaylors.example.vegnish.MAD_assignment1;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 
 import mobileapptaylors.example.vegnish.MAD_assignment1.R;
 import com.facebook.stetho.Stetho;
@@ -32,12 +34,21 @@ public class HistorySlots extends AppCompatActivity {
         });
     }
 
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), Home.class);
+        startActivityForResult(myIntent, 0);
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_slots);
         setTitle("History Slots");
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         Stetho.initializeWithDefaults(this);
         RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
         recList.setHasFixedSize(true);

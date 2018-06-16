@@ -1,5 +1,6 @@
 package mobileapptaylors.example.vegnish.MAD_assignment1;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -31,6 +33,7 @@ public class AddSlots extends AppCompatActivity {
     long date_,  time_, time_end_, temp_EndTime;
     final Calendar myCalendar = Calendar.getInstance();
     boolean endTimeBool = true;
+
 
     public void createSlotObj(EditText subjectName, EditText location, Object selectedItem){
         subject_name = subjectName.getText().toString();
@@ -132,12 +135,25 @@ public class AddSlots extends AppCompatActivity {
         });
         builder.show();
     }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), Home.class);
+        startActivityForResult(myIntent, 0);
+        return true;
+    }
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Stetho.initializeWithDefaults(this);
         setContentView(mobileapptaylors.example.vegnish.MAD_assignment1.R.layout.activity_add_slots);
         setTitle("Add Slots");
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         final EditText subjectName = (EditText) findViewById(mobileapptaylors.example.vegnish.MAD_assignment1.R.id.subjectName);
         final EditText date = (EditText) findViewById(mobileapptaylors.example.vegnish.MAD_assignment1.R.id.date);
         final EditText time = (EditText) findViewById(mobileapptaylors.example.vegnish.MAD_assignment1.R.id.time);
