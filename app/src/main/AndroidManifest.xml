@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mobileapptaylors.example.vegnish.MAD_assignment1">
 
+    <!--Read/Write Permission for Storing PDF file-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <!-- wake lock so the phone can be activated -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
