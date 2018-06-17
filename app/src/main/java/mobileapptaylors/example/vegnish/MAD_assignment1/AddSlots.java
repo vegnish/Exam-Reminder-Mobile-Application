@@ -180,7 +180,7 @@ public class AddSlots extends AppCompatActivity {
         date.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                DatePickerDialog current = new DatePickerDialog(AddSlots.this, R.style.DatePickerDialogTheme,date_new, myCalendar
+                DatePickerDialog current = new DatePickerDialog(AddSlots.this,date_new, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
                 current.getDatePicker().setMinDate(System.currentTimeMillis());

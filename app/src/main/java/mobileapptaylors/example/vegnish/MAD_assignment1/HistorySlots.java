@@ -4,6 +4,9 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -24,12 +27,16 @@ import com.facebook.stetho.Stetho;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -101,7 +108,7 @@ public class HistorySlots extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult (int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case REQUEST_CODE_ASK_PERMISSIONS:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -133,7 +140,7 @@ public class HistorySlots extends AppCompatActivity {
                 .show();
     }
 
-    private void createPdf() throws FileNotFoundException, DocumentException {
+    private void createPdf() throws FileNotFoundException, DocumentException{
 
         File docsFolder = new File(Environment.getExternalStorageDirectory() + "/Documents");
         if (!docsFolder.exists()) {
@@ -152,25 +159,51 @@ public class HistorySlots extends AppCompatActivity {
         document.open();
 
         int counter=1;
+        Image img = null;
+        Image image = null;
+        try {
+
+            Drawable d = getResources().getDrawable(R.mipmap.logo);
+            BitmapDrawable bitDw = ((BitmapDrawable) d);
+            Bitmap bmp = bitDw.getBitmap();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            image = Image.getInstance(stream.toByteArray());
+//            image.setBorderWidth(15);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Iterator<SlotsModel> iter = allSlots.iterator();
         while (iter.hasNext()) {
             if(counter!=1)
                 counter++;
+            if(counter == 1) {
+//                img.setAbsolutePosition(0, 0);
+                image.scalePercent(10);
+                image.setAlignment(Element.ALIGN_CENTER);
+                document.add(image);
+//                document.add(new Paragraph("\n\n"));
+                document.add(new Paragraph("History Slots\n\n"));
+            }
             SlotsModel p = iter.next();
             long date = p.getDate_();
             long time = p.getTime_();
+            long time2 = p.getTime_end();
 
 //            Long date_1 = new Long(date.getDate_());
             Date new_date = new Date(time);
+            Date new_date2 = new Date(time2);
             SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat dateformat2 = new SimpleDateFormat("KK:mm:a");
 
             final String location = p.getLocation_();
-            document.add(new Paragraph(dateformat.format(new_date)+"\n"+location+"\n\n"));
-
+            document.add(new Paragraph(counter+".  "+dateformat.format(new_date)+"\nStart Time: "+dateformat2.format(new_date)+"\nEnd Time: "+dateformat2.format(new_date2)+"\nLocation: "+location+"\n\n"));
         }
-
-        document.add(new Paragraph("Hello World\n"));
-        document.add(new Paragraph("How are you today?\n"));
+//
+//        document.add(new Paragraph("Hello World\n"));
+//        document.add(new Paragraph("How are you today?\n"));
 
         document.close();
         previewPdf();
