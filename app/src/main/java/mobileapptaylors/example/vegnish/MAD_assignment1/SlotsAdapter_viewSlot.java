@@ -2,10 +2,6 @@ package mobileapptaylors.example.vegnish.MAD_assignment1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,10 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -89,18 +83,14 @@ public class SlotsAdapter_viewSlot extends RecyclerView.Adapter<SlotsAdapter_vie
         builder.setPositiveButton("Update",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which){
-//                startActivity(new Intent(ViewSlots.this,Home.class));
-                //DB object creation
-                final SQLiteHelper sQLiteHelper = new SQLiteHelper(activity);
+
                 Log.d("startTime", "onClick:");
                 SlotsModel slotsObj = slotsList.get(i);
 
-                slotsObj.setLocation_("ffff");
-                sQLiteHelper.updateSlot(slotsObj,id_);
-                Intent refresh = new Intent(activity, ViewSlots.class);
-                activity.startActivity(refresh);
-                Log.d("Refresher", "onClick: Refreshed");
-                activity.finish();
+                Intent myIntent = new Intent(activity, updateSlot.class);
+                myIntent.putExtra("slotObject",slotsObj); //Optional parameters
+                activity.startActivity(myIntent);
+
             }
         });
         builder.setNegativeButton("Delete",new DialogInterface.OnClickListener() {
@@ -109,11 +99,9 @@ public class SlotsAdapter_viewSlot extends RecyclerView.Adapter<SlotsAdapter_vie
 //                startActivity(new Intent(ViewSlots.this,Home.class));
                 //DB object creation
                 final SQLiteHelper sQLiteHelper = new SQLiteHelper(activity);
-                Log.d("startTime", "onClick:");
                 sQLiteHelper.deleteSlot(id_);
                 Intent refresh = new Intent(activity, ViewSlots.class);
                 activity.startActivity(refresh);
-                Log.d("Refresher", "onClick: Refreshed");
                 activity.finish();
             }
         });

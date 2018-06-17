@@ -56,7 +56,8 @@
         <activity android:name=".HistorySlots" />
         <activity android:name=".Welcome" />
         <activity android:name=".AboutUs" />
-        <activity android:name=".Help"></activity>
+        <activity android:name=".Help" />
+        <activity android:name=".updateSlot"></activity>
     </application>
 
 </manifest>
