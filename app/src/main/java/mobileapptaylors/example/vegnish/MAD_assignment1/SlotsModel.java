@@ -1,9 +1,10 @@
 package mobileapptaylors.example.vegnish.MAD_assignment1;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-public class SlotsModel {
+public class SlotsModel implements Serializable{
     private String location_, spinner_ ;
     private long date_,time_, time_end;
     private int id;
@@ -24,7 +25,9 @@ public class SlotsModel {
         this.time_end = time_end;
         this.spinner_ = spinner_;
     }
+    public SlotsModel (){
 
+    }
     public int getId() {
         return id;
     }
@@ -34,7 +37,7 @@ public class SlotsModel {
     }
 
 
-    public SlotsModel (){
+    public SlotsModel(Serializable key){
 
     }
     public String getSpinner_() {
