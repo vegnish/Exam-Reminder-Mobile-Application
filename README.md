@@ -1,20 +1,27 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
-
-# Getting Started
+A utility-based Android mobile application that provides reminders to exam invigilators on their upcoming slots.
+ 
+# Functionalities
 TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+1.	Adding a new slot
+2.	View upcoming slots / past slots
+3.	Pre-recorded Announcements that could be played before and after an examination (eg: special instructions on filling certain answer sheets)
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+Pre-requisite: You will need Android Studio installed on your machine.
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+Refer the following [guidelines](https://developer.android.com/training/basics/firstapp/running-app) on steps to either:-
+  a) Run the app on a real Android device, OR
+  b) Run the app on an emulator on your local machine
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+
+# [Google Play Store Link](https://goo.gl/CAc4Ck) :iphone:
+:thumbsup: Feel free to download it and leave a couple of ratings/comments! :thumbsup:
+
+# Screenshots
+![image](https://user-images.githubusercontent.com/35124929/52573506-466a9a00-2e55-11e9-960b-eb53cad3502f.png) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![image](https://user-images.githubusercontent.com/35124929/52573680-9b0e1500-2e55-11e9-93ee-85c4f71dfd7d.png)
+
+
+# Contact
+Email: vegnishrao93@gmail.com
