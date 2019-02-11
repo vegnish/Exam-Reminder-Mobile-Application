@@ -2,7 +2,6 @@
 A utility-based Android mobile application that provides reminders to exam invigilators on their upcoming slots.
  
 # Functionalities
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
 1.	Adding a new slot
 2.	View upcoming slots / past slots
 3.	Pre-recorded Announcements that could be played before and after an examination (eg: special instructions on filling certain answer sheets)
@@ -10,9 +9,9 @@ TODO: Guide users through getting your code up and running on their own system. 
 # Build and Test
 Pre-requisite: You will need Android Studio installed on your machine.
 
-Refer the following [guidelines](https://developer.android.com/training/basics/firstapp/running-app) on steps to either:-
-  a) Run the app on a real Android device, OR
-  b) Run the app on an emulator on your local machine
+Refer to the following [guidelines](https://developer.android.com/training/basics/firstapp/running-app) on steps to either:- <br/>
+&nbsp;&nbsp; a) Run the app on a real Android device, OR <br/>
+&nbsp;&nbsp; b) Run the app on an emulator on your local machine
 
 
 # [Google Play Store Link](https://goo.gl/CAc4Ck) :iphone:
